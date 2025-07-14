@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://pt336ljqn48h"]
+
+[ext_resource type="Script" uid="uid://cgxjgvny8gn27" path="res://player/player.gd" id="1_oul6g"]
+[ext_resource type="Script" uid="uid://ciyajpfw76evj" path="res://player/fp_cam.gd" id="2_rkbax"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kqu6x"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_oul6g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkbax"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_g1dw6"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_oul6g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kqu6x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.04411, 0, 0, 0, 1.04411, 0, 0, 0, 1.04411, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_oul6g")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.547037, 0)
+script = ExtResource("2_rkbax")
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="RayCast3D" type="RayCast3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -1.1854e-07, -1, 0, 2.71188, -4.37114e-08, 0, 2.69852e-08, -0.61735)
+collision_mask = 3
+
+[node name="Hand" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.27527)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Head/Hand"]
+transform = Transform3D(0.11, 0, 0, 0, 0.11, 0, 0, 0, 0.11, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_rkbax")
+mesh = SubResource("SphereMesh_g1dw6")

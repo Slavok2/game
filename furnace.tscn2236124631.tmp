@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://drqeoutxxou42"]
+
+[ext_resource type="Script" uid="uid://c18sqqrm1kpmv" path="res://furnace.gd" id="1_5qg16"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nmvyr"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5qg16"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qg16"]
+
+[node name="Furnace" type="Node3D"]
+script = ExtResource("1_5qg16")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_nmvyr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.00382, 0, 0, 0, 1.00382, 0, 0, 0, 1.00382, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_5qg16")
+mesh = SubResource("BoxMesh_5qg16")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
