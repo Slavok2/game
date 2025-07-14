@@ -1,8 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b1q8peoeji4kd"]
 
 [ext_resource type="PackedScene" uid="uid://pt336ljqn48h" path="res://player/player.tscn" id="1_noarx"]
-[ext_resource type="Script" uid="uid://cyr4fytr3w1g1" path="res://rigid_body_3d.gd" id="2_a0tk4"]
-[ext_resource type="PackedScene" uid="uid://drqeoutxxou42" path="res://furnace.tscn" id="2_noarx"]
+[ext_resource type="PackedScene" uid="uid://divl507kgxbp6" path="res://items/malachite.tscn" id="3_a0tk4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -22,6 +21,20 @@ size = Vector3(15, 1, 15)
 
 [sub_resource type="BoxMesh" id="BoxMesh_a202f"]
 size = Vector3(15, 1, 15)
+
+[sub_resource type="GDScript" id="GDScript_noarx"]
+script/source = "extends RigidBody3D
+
+
+
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+
+func _process(delta: float) -> void:
+	pass
+"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_noarx"]
 albedo_color = Color(1, 1, 0, 1)
@@ -54,7 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.81957, 0)
 
 [node name="RigidBody3D" type="RigidBody3D" parent="." groups=["pickable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.31695, 1.81096, -0.313418)
-script = ExtResource("2_a0tk4")
+script = SubResource("GDScript_noarx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
 material_override = SubResource("StandardMaterial3D_noarx")
@@ -63,7 +76,7 @@ mesh = SubResource("BoxMesh_noarx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_a0tk4")
 
-[node name="Furnace" parent="." instance=ExtResource("2_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5.00227)
+[node name="malachite" parent="RigidBody3D/CollisionShape3D" instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0305, 0, 3.16008)
 
 [connection signal="body_shape_entered" from="RigidBody3D" to="Player" method="_on_rigid_body_3d_body_shape_entered"]
