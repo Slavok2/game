@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1q8peoeji4kd"]
+[gd_scene load_steps=14 format=3 uid="uid://b1q8peoeji4kd"]
 
 [ext_resource type="PackedScene" uid="uid://pt336ljqn48h" path="res://player/player.tscn" id="1_noarx"]
-[ext_resource type="PackedScene" uid="uid://divl507kgxbp6" path="res://items/malachite.tscn" id="3_a0tk4"]
+[ext_resource type="Script" uid="uid://bf5a5bawqowbq" path="res://node_3d.gd" id="1_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://cv703dvyd0wil" path="res://items/malachite.tscn" id="3_a0tk4"]
+[ext_resource type="PackedScene" uid="uid://ddw0bfyq7bmoa" path="res://UI/resources.tscn" id="3_r3fl7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -46,6 +48,7 @@ size = Vector3(0.5, 0.5, 0.5)
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="Node3D" type="Node3D"]
+script = ExtResource("1_r3fl7")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a0tk4")
@@ -76,7 +79,9 @@ mesh = SubResource("BoxMesh_noarx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
 shape = SubResource("BoxShape3D_a0tk4")
 
-[node name="malachite" parent="RigidBody3D/CollisionShape3D" instance=ExtResource("3_a0tk4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0305, 0, 3.16008)
+[node name="Malachite" parent="." instance=ExtResource("3_a0tk4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.47759, 3.62634)
+
+[node name="Resources" parent="." instance=ExtResource("3_r3fl7")]
 
 [connection signal="body_shape_entered" from="RigidBody3D" to="Player" method="_on_rigid_body_3d_body_shape_entered"]

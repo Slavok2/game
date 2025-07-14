@@ -18,9 +18,13 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
-
 		if collider and collider.is_in_group("pickable"):
 			if Input.is_action_pressed("interact"):
 				if collider is RigidBody3D:
 					collider.global_transform = hand.global_transform
 					collider.linear_velocity = Vector3(0.1, 3, 0)
+		if collider and collider.is_in_group("malachite"):
+			if Input.is_action_pressed("shifti"):
+				if collider is RigidBody3D:
+					collider.queue_free()
+					Global.Malachite += 1

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv703dvyd0wil"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_68tau"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uru3w"]
+albedo_color = Color(0, 0.890196, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_n8skj"]
+
+[node name="RigidBody3D" type="RigidBody3D" groups=["malachite", "pickable"]]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_68tau")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_uru3w")
+mesh = SubResource("SphereMesh_n8skj")
+skeleton = NodePath("../CollisionShape3D")
